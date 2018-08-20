@@ -1,0 +1,7 @@
+{
+  "name": "git-solution-fetcher",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tomasz Drwięga <tomusdrw@gmail.com>",
+  "license": "MIT"
+}
