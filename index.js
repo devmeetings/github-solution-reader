@@ -1,13 +1,17 @@
 const octokit = require('@octokit/rest')()
 const Dashboard = require('./dashboard')
 
+octokit.authenticate({
+  type: 'oauth',
+  token: '10188b3cca0b32d28c26d7e1f25873b2d30f95f7'
+})
 
 doWork([
   {
     owner: 'tomusdrw',
-    repo: 'rust-web3'
+    repo: 'solutionstest'
   }
-], 5000)
+], 10000)
 
 async function doWork (repos, interval) {
   let newRepos = repos;
@@ -18,7 +22,7 @@ async function doWork (repos, interval) {
   }
 
   setTimeout(() => {
-    doWork(newRepos)
+    doWork(newRepos, interval)
   }, interval)
 }
 
@@ -39,7 +43,29 @@ async function buildDashboard (repos) {
 }
 
 function findSolutions (commits) {
-  return []
+  return commits.reduce((solutions, commit) => {
+    const solution = /\[\s*#\s*(\d+(.\d+)?)\s*\]/
+    const match = commit.message.match(solution)
+
+    if (match) {
+      const res = parseFloat(match[1])
+      if (!isNaN(res)) {
+        solutions[res] = commit
+      }
+    }
+
+    return solutions;
+  }, {});
+}
+
+function extractCommitData (commit) {
+  return {
+    sha: commit.sha,
+    url: commit.url,
+    message: commit.commit.message,
+    name: commit.commit.author.name,
+    email: commit.commit.author.email
+  }
 }
 
 function collectCommits (repos) {
@@ -74,14 +100,4 @@ function collectCommits (repos) {
 
     return previousData
   }))
-}
-
-function extractCommitData (commit) {
-  return {
-    sha: commit.sha,
-    url: commit.url,
-    message: commit.message,
-    name: commit.author.name,
-    email: commit.author.email
-  }
 }
