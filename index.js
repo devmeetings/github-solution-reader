@@ -6,19 +6,30 @@ octokit.authenticate({
   token: '10188b3cca0b32d28c26d7e1f25873b2d30f95f7'
 })
 
-doWork([
-  {
-    owner: 'tomusdrw',
-    repo: 'solutionstest'
-  }
-], 10000)
+const repos = require('fs')
+  .readFileSync(process.argv[2] || './repos.txt', 'utf8')
+  .split('\n')
+  .filter(x => x)
+  .map(line => {
+    const pattern = /([^ /\\]+)[/ ]([^ /\\]+)(.git)?$/
+    const match = line.match(pattern)
+    if (!match) {
+      throw new Error(`Cannot read repo: ${line}`)
+    }
+    return {
+      owner: match[1],
+      repo: match[2]
+    }
+  })
+
+doWork(repos, parseInt(process.argv[2]) || 30000)
 
 async function doWork (repos, interval) {
-  let newRepos = repos;
+  let newRepos = repos
   try {
     newRepos = await buildDashboard(repos)
   } catch (e) {
-    console.error("Unable to fetch data", e)
+    console.error('Unable to fetch data', e)
   }
 
   setTimeout(() => {
@@ -28,11 +39,11 @@ async function doWork (repos, interval) {
 
 async function buildDashboard (repos) {
   const commitsForRepos = await collectCommits(repos)
-  const writer = new Dashboard();
+  const writer = new Dashboard()
 
   await writer.start()
 
-  for (repo of commitsForRepos) {
+  for (const repo of commitsForRepos) {
     const solutions = findSolutions(repo.commits)
     await writer.addRow(repo.owner, repo.repo, solutions)
   }
@@ -54,8 +65,8 @@ function findSolutions (commits) {
       }
     }
 
-    return solutions;
-  }, {});
+    return solutions
+  }, {})
 }
 
 function extractCommitData (commit) {
@@ -74,7 +85,7 @@ function collectCommits (repos) {
     const lastCommit = await octokit.repos.getCommits({
       owner,
       repo,
-      per_page: 1,
+      per_page: 1
     })
 
     // Nothing changed
@@ -86,7 +97,7 @@ function collectCommits (repos) {
     let response = await octokit.repos.getCommits({
       owner,
       repo,
-      per_page: 100,
+      per_page: 100
     })
 
     let newCommits = response.data.map(extractCommitData)
