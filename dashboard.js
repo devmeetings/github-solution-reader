@@ -34,6 +34,6 @@ module.exports = class Dashboard {
     })
 
     console.log(content)
-    fs.writeFileSync('dashboard.html', content, 'utf8')
+    fs.writeFileSync('index.html', content, 'utf8')
   }
 }
