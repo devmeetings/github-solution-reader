@@ -3,5 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Tomasz Drwięga <tomusdrw@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./index.js",
+    "lint": "standard"
+  },
+  "dependencies": {
+    "@octokit/rest": "^15.10.0"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
+  }
 }
