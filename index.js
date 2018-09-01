@@ -54,6 +54,7 @@ async function buildDashboard (repos) {
 }
 
 function findSolutions (commits) {
+  commits = commits || []
   return commits.reduce((solutions, commit) => {
     const solution = /\[\s*#\s*(\d+(.\d+)?)\s*\]/
     const match = commit.message.match(solution)
