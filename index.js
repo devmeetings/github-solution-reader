@@ -82,33 +82,38 @@ function extractCommitData (commit) {
 function collectCommits (repos) {
   return Promise.all(repos.map(async previousData => {
     const { owner, repo, commits } = previousData
-    const lastCommit = await octokit.repos.getCommits({
-      owner,
-      repo,
-      per_page: 1
-    })
+    try {
+      const lastCommit = await octokit.repos.getCommits({
+        owner,
+        repo,
+        per_page: 1
+      })
 
-    // Nothing changed
-    if (commits && commits[0] && lastCommit.data[0].sha === commits[0].sha) {
+      // Nothing changed
+      if (commits && commits[0] && lastCommit.data[0].sha === commits[0].sha) {
+        return previousData
+      }
+
+      // fetch all commits
+      let response = await octokit.repos.getCommits({
+        owner,
+        repo,
+        per_page: 100
+      })
+
+      let newCommits = response.data.map(extractCommitData)
+
+      while (octokit.hasNextPage(response)) {
+        response = await octokit.getNextPage(response)
+        newCommits = newCommits.concat(response.data.map(extractCommitData))
+      }
+
+      previousData.commits = newCommits
+
       return previousData
+    } catch (e) {
+      console.error(e);
+      return previousData;
     }
-
-    // fetch all commits
-    let response = await octokit.repos.getCommits({
-      owner,
-      repo,
-      per_page: 100
-    })
-
-    let newCommits = response.data.map(extractCommitData)
-
-    while (octokit.hasNextPage(response)) {
-      response = await octokit.getNextPage(response)
-      newCommits = newCommits.concat(response.data.map(extractCommitData))
-    }
-
-    previousData.commits = newCommits
-
-    return previousData
   }))
 }
