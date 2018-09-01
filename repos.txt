@@ -2,12 +2,12 @@ https://github.com/mikol1980/rn-dm
 https://github.com/wrb94/react-native-workshop
 https://github.com/l1553k/devmeeting
 https://github.com/YahorY/ReactNativeDevMeetUp
-https://github.com/bartij/devmeeting-repo.git
+https://github.com/bartij/devmeeting-repo
 https://github.com/stimoroll/devrn
 https://github.com/mahjong/DevMeeting
 https://github.com/Kubcys/react-native-devmeetings
 https://github.com/dchecneurosys/reactnative
-https://github.com/killerofnickspl/react_Native.git
+https://github.com/killerofnickspl/react_Native
 https://github.com/jacekk/devmeeting-rn-app
 https://github.com/Bunzlau/Bunzlau
 https://github.com/aciura/react-native-app
