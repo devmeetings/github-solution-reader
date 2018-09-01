@@ -16,3 +16,8 @@ https://github.com/mamapi/rn-app
 https://github.com/kjurkiewicz/react-native
 https://github.com/KrissDesign/react
 https://github.com/silvermario/firstreactnative
+https://github.com/mazurewa/ReactNativeApp
+https://github.com/byPatri/ReactNative
+https://github.com/LaskaZ/React
+https://github.com/jrecka/react-native-app
+https://github.com/OlaKotkowska/react-native-app
