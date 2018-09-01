@@ -14,3 +14,5 @@ https://github.com/aciura/react-native-app
 https://github.com/CombatCode/create-react-native-app
 https://github.com/mamapi/rn-app
 https://github.com/kjurkiewicz/react-native
+https://github.com/KrissDesign/react
+https://github.com/silvermario/firstreactnative
