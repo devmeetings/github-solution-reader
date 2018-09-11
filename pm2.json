@@ -1,0 +1,6 @@
+{
+	"name": "github-solution",
+	"script": "./index.js",
+	"watch":  true,
+	"ignore_watch":	["index.html"]
+}

@@ -22,7 +22,9 @@ const repos = require('fs')
     }
   })
 
-doWork(repos, parseInt(process.argv[2]) || 30000)
+if (require.main === module) {
+  doWork(repos, parseInt(process.argv[2]) || 30000)
+}
 
 async function doWork (repos, interval) {
   let newRepos = repos
@@ -56,10 +58,9 @@ async function buildDashboard (repos) {
 function findSolutions (commits) {
   commits = commits || []
   return commits.reduce((solutions, commit) => {
-    const solution = /\[\s*#\s*(\d+(.\d+)?)\s*\]/
-    const match = commit.message.match(solution)
-
-    if (match) {
+    const solution = /\[\s*#\s*(\d+(.\d+)?)\s*\]/g
+    let match;
+    while (match = solution.exec(commit.message)) {
       const res = parseFloat(match[1])
       if (!isNaN(res)) {
         solutions[res] = commit
@@ -69,6 +70,7 @@ function findSolutions (commits) {
     return solutions
   }, {})
 }
+exports.findSolutions = findSolutions;
 
 function extractCommitData (commit) {
   return {
