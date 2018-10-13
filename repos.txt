@@ -8,9 +8,9 @@ https://github.com/paweljurczynski/dm-blockchain
 https://github.com/gbolek/devmeeting-blockchain
 https://github.com/Arkowski24/blockchain-workshop
 https://github.com/SebastianTroc/blockchain-parity-workshops
-https://github.com/wopol/parity.git
-https://github.com/voyo/blockchain-dev-playground.git
-https://github.com/Ispen/Blockchain-DevMeeting.git
-https://github.com/voyo/blockchain-dev-playground.git
+https://github.com/wopol/parity
+https://github.com/voyo/blockchain-dev-playground
+https://github.com/Ispen/Blockchain-DevMeeting
+https://github.com/voyo/blockchain-dev-playground
 https://github.com/PiotrekKowal/blockchain_devmeeting
 https://github.com/jjaracz/Parity
