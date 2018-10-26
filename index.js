@@ -23,7 +23,12 @@ const repos = require('fs')
   })
 
 if (require.main === module) {
-  doWork(repos, parseInt(process.argv[2]) || 30000)
+  // delay starting work to prevent restart&crash cycle
+  console.log('Delayed start...')
+
+  setTimeout(() => {
+    doWork(repos, parseInt(process.argv[2]) || 30000)
+  }, 5000)
 }
 
 async function doWork (repos, interval) {
