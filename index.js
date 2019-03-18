@@ -1,9 +1,15 @@
 const octokit = require('@octokit/rest')()
 const Dashboard = require('./dashboard')
+const { startServer } = require('./server')
+
+const token = process.env.TOKEN
+if (!token) {
+  throw new Error('Github TOKEN is required')
+}
 
 octokit.authenticate({
   type: 'oauth',
-  token: '10188b3cca0b32d28c26d7e1f25873b2d30f95f7'
+  token
 })
 
 const repos = require('fs')
@@ -29,6 +35,8 @@ if (require.main === module) {
   setTimeout(() => {
     doWork(repos, parseInt(process.argv[2]) || 30000)
   }, 5000)
+
+  startServer()
 }
 
 async function doWork (repos, interval) {
