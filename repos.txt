@@ -1,1 +1,10 @@
-https://github.com/mfcreator/test
+https://github.com/meridPL/vue-warsztaty
+https://github.com/derpdead/vue
+https://github.com/schodevio/devmeet1304
+https://github.com/PaulinaOpanowska/VueApp
+https://github.com/Unoob/DevMeetVueVuex
+https://github.com/toper/DevMeetingVueEx
+https://github.com/tomaszkiewiczanna/devmeeting
+https://github.com/Nevo0/vue-devmeeting-2
+https://github.com/ciembor/vue-meeting
+https://github.com/Mikulew/vue-advanced-dev-meeting-13-04-19
